@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="عيادة إشراقة للأسنان والتجميل — بغداد، مدينة الصدر. احجز موعدك اليوم مع أفضل أطباء الأسنان والتجميل." />
+  <title>عيادة إشراقة للأسنان والتجميل</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/home.css" />
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════
+       NAVBAR
+  ═══════════════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="18" fill="#FAF6EE" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M12 14C12 10.686 14.686 8 18 8C19.1 8 20.14 8.3 21 8.84C21.86 8.3 22.9 8 24 8C27.314 8 30 10.686 30 14C30 17.5 28.2 20.5 26 23C24.8 24.3 23.4 25.8 22.6 27.8C22.3 28.5 21.7 29 21 29C20.3 29 19.7 28.5 19.4 27.8C18.6 25.8 17.2 24.3 16 23C13.8 20.5 12 17.5 12 14Z" fill="#F7D4DC" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M21 8.84C21 8.84 21 14 21 16" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="ar">عيادة إشراقة</span>
+        <span class="en">Ishraqa Clinic</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="#services">خدماتنا</a>
+      <a href="#doctors">أطباؤنا</a>
+      <a href="#about">عن العيادة</a>
+      <a href="booking.html" class="nav-cta">📅 احجز موعد</a>
+    </div>
+
+    <button class="nav-hamburger" id="hamburger" aria-label="القائمة">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="#services">خدماتنا</a>
+    <a href="#doctors">أطباؤنا</a>
+    <a href="#about">عن العيادة</a>
+    <a href="booking.html" style="color:var(--gold-dark);font-weight:700;">📅 احجز موعد</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-shapes" aria-hidden="true">
+      <div class="shape shape-1"></div>
+      <div class="shape shape-2"></div>
+      <div class="shape shape-3"></div>
+    </div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <span class="hero-badge animate-in">
+          <span class="dot-gold"></span>
+          بغداد · مدينة الصدر
+        </span>
+
+        <h1 class="hero-title animate-in-delay">
+          ابتسامتك <span class="text-gold">إشراقة</span>
+          <br />تستحق الأفضل
+        </h1>
+
+        <p class="hero-desc" style="animation: fadeInUp 0.5s ease 0.25s both; opacity:0;">
+          عيادة متخصصة بطب الأسنان والتجميل، نقدم خدمات عالية الجودة
+          بأيدي كوادر متخصصة في بيئة مريحة وحديثة.
+        </p>
+
+        <div class="hero-actions" style="animation: fadeInUp 0.5s ease 0.35s both; opacity:0;">
+          <a href="booking.html" class="btn btn-primary btn-lg">
+            📅 احجز موعدك الآن
+          </a>
+          <a href="#services" class="btn btn-outline">
+            تعرّف على خدماتنا
+          </a>
+        </div>
+
+        <div class="hero-trust" style="animation: fadeInUp 0.5s ease 0.45s both; opacity:0;">
+          <div class="trust-item">
+            <span class="trust-num">٢</span>
+            <span class="trust-label">طبيب متخصص</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <span class="trust-num">٩+</span>
+            <span class="trust-label">خدمة متاحة</span>
+          </div>
+          <div class="trust-divider"></div>
+          <div class="trust-item">
+            <span class="trust-num">حجز</span>
+            <span class="trust-label">سريع وسهل</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual" style="animation: fadeIn 0.8s ease 0.2s both; opacity:0;" aria-hidden="true">
+        <div class="hero-card-wrap">
+          <div class="hero-main-card">
+            <div class="hero-card-icon">
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" width="80" height="80">
+                <circle cx="40" cy="40" r="38" fill="#F5E9C8" stroke="#C9A84C" stroke-width="2"/>
+                <path d="M24 26C24 19.373 29.373 14 36 14C38.8 14 41.4 14.9 43.5 16.5C45.6 14.9 48.2 14 51 14C57.627 14 63 19.373 63 26C63 35 58.5 42.5 53 48.5C50 51.8 46.5 55.5 44.5 60.5C43.7 62.5 42.1 64 40 64C37.9 64 36.3 62.5 35.5 60.5C33.5 55.5 30 51.8 27 48.5C21.5 42.5 17 35 17 26H24Z" fill="#FBF0F3" stroke="#C9A84C" stroke-width="2.5" stroke-linejoin="round"/>
+                <path d="M43.5 16.5C43.5 16.5 43.5 30 43.5 35" stroke="#C9A84C" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="40" cy="40" r="3" fill="#E8A0B0"/>
+              </svg>
+            </div>
+            <p class="hero-card-title">عيادة إشراقة</p>
+            <p class="hero-card-sub">للأسنان والتجميل</p>
+          </div>
+
+          <div class="floating-badge float-1">
+            <span>✨</span> تجميل احترافي
+          </div>
+          <div class="floating-badge float-2">
+            <span>🦷</span> أسنان صحية
+          </div>
+          <div class="floating-badge float-3">
+            <span>⭐</span> رعاية متميزة
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════════════ -->
+  <section class="section services-section" id="services">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">✦ خدماتنا ✦</div>
+        <h2 class="section-title">كل ما تحتاجه في مكان واحد</h2>
+        <p class="section-subtitle">نقدم مجموعة شاملة من خدمات طب الأسنان والتجميل بأعلى معايير الجودة</p>
+      </div>
+
+      <div class="services-grid stagger-children">
+        <div class="service-card">
+          <div class="service-icon">🦷</div>
+          <h3>فحص واستشارة</h3>
+          <p>فحص شامل وتشخيص دقيق مع خطة علاجية مناسبة</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">🔧</div>
+          <h3>قلع وتحشية</h3>
+          <p>إجراءات قلع وتحشية الأسنان بأحدث التقنيات</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">✨</div>
+          <h3>تنظيف وتبييض</h3>
+          <p>تنظيف عميق وتبييض متقدم للحصول على ابتسامة ناصعة</p>
+        </div>
+        <div class="service-card service-card-featured">
+          <div class="service-icon">💉</div>
+          <h3>نفخ الشفاه</h3>
+          <p>تحسين مظهر الشفاه بتقنيات الحشو الطبيعي</p>
+        </div>
+        <div class="service-card service-card-featured">
+          <div class="service-icon">💫</div>
+          <h3>بوتوكس</h3>
+          <p>علاجات بوتوكس احترافية بنتائج طبيعية ومضمونة</p>
+        </div>
+        <div class="service-card service-card-featured">
+          <div class="service-icon">🌸</div>
+          <h3>تجميل</h3>
+          <p>خدمات تجميل متكاملة لإبراز جمالك الطبيعي</p>
+        </div>
+      </div>
+
+      <div class="services-cta">
+        <a href="booking.html" class="btn btn-primary btn-lg">
+          احجز الخدمة التي تريدها
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       DOCTORS
+  ═══════════════════════════════════════════════════ -->
+  <section class="section doctors-section" id="doctors">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">✦ كادرنا الطبي ✦</div>
+        <h2 class="section-title">أطباؤنا المتخصصون</h2>
+        <p class="section-subtitle">فريق طبي متميز يجمع بين الخبرة والكفاءة العالية</p>
+      </div>
+
+      <div class="doctors-grid stagger-children">
+        <div class="doctor-card">
+          <div class="doctor-avatar">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <circle cx="60" cy="60" r="58" fill="url(#grad1)" stroke="#C9A84C" stroke-width="2"/>
+              <defs>
+                <radialGradient id="grad1" cx="50%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#FBF0F3"/>
+                  <stop offset="100%" stop-color="#F5E9C8"/>
+                </radialGradient>
+              </defs>
+              <circle cx="60" cy="46" r="18" fill="#E8A0B0" opacity="0.6"/>
+              <ellipse cx="60" cy="95" rx="30" ry="20" fill="#E8A0B0" opacity="0.5"/>
+              <text x="60" y="52" font-family="Tajawal" font-size="22" fill="#C9A84C" text-anchor="middle" font-weight="700">م</text>
+            </svg>
+          </div>
+          <div class="doctor-info">
+            <h3 class="doctor-name">د. منار</h3>
+            <p class="doctor-title">طبيبة أسنان وتجميل</p>
+            <div class="doctor-tags">
+              <span class="doctor-tag">طب الأسنان</span>
+              <span class="doctor-tag">تجميل</span>
+              <span class="doctor-tag">بوتوكس</span>
+            </div>
+            <a href="booking.html?doctor=manar" class="btn btn-outline" style="margin-top:var(--space-md); width:100%; justify-content:center;">
+              احجز مع د. منار
+            </a>
+          </div>
+        </div>
+
+        <div class="doctor-card">
+          <div class="doctor-avatar">
+            <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <circle cx="60" cy="60" r="58" fill="url(#grad2)" stroke="#C9A84C" stroke-width="2"/>
+              <defs>
+                <radialGradient id="grad2" cx="50%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#F7D4DC"/>
+                  <stop offset="100%" stop-color="#F5E9C8"/>
+                </radialGradient>
+              </defs>
+              <circle cx="60" cy="46" r="18" fill="#C9A84C" opacity="0.4"/>
+              <ellipse cx="60" cy="95" rx="30" ry="20" fill="#C9A84C" opacity="0.35"/>
+              <text x="60" y="52" font-family="Tajawal" font-size="22" fill="#9A7A2E" text-anchor="middle" font-weight="700">ز</text>
+            </svg>
+          </div>
+          <div class="doctor-info">
+            <h3 class="doctor-name">د. زهراء</h3>
+            <p class="doctor-title">طبيبة أسنان وتجميل</p>
+            <div class="doctor-tags">
+              <span class="doctor-tag">طب الأسنان</span>
+              <span class="doctor-tag">نفخ الشفاه</span>
+              <span class="doctor-tag">تبييض</span>
+            </div>
+            <a href="booking.html?doctor=zahraa" class="btn btn-outline" style="margin-top:var(--space-md); width:100%; justify-content:center;">
+              احجز مع د. زهراء
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       HOW IT WORKS
+  ═══════════════════════════════════════════════════ -->
+  <section class="section how-section" id="about">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-eyebrow">✦ طريقة الحجز ✦</div>
+        <h2 class="section-title">خطوات بسيطة للحجز</h2>
+        <p class="section-subtitle">احجز موعدك في دقائق معدودة</p>
+      </div>
+
+      <div class="steps-grid stagger-children">
+        <div class="step-item">
+          <div class="step-number">١</div>
+          <h3>اختر الخدمة</h3>
+          <p>اختر الخدمة التي تحتاجها والطبيب المفضل لديك</p>
+        </div>
+        <div class="step-arrow">←</div>
+        <div class="step-item">
+          <div class="step-number">٢</div>
+          <h3>حدد الموعد</h3>
+          <p>اختر التاريخ والوقت المناسب لك</p>
+        </div>
+        <div class="step-arrow">←</div>
+        <div class="step-item">
+          <div class="step-number">٣</div>
+          <h3>أكّد الحجز</h3>
+          <p>أرسل طلبك وستصلك رسالة تأكيد قريباً</p>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:var(--space-2xl);">
+        <a href="booking.html" class="btn btn-primary btn-lg">
+          ابدأ الحجز الآن ←
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo" style="margin-bottom:var(--space-md);">
+          <svg width="34" height="34" viewBox="0 0 38 38" fill="none">
+            <circle cx="19" cy="19" r="18" fill="#3D3020" stroke="#C9A84C" stroke-width="1.5"/>
+            <path d="M12 14C12 10.686 14.686 8 18 8C19.1 8 20.14 8.3 21 8.84C21.86 8.3 22.9 8 24 8C27.314 8 30 10.686 30 14C30 17.5 28.2 20.5 26 23C24.8 24.3 23.4 25.8 22.6 27.8C22.3 28.5 21.7 29 21 29C20.3 29 19.7 28.5 19.4 27.8C18.6 25.8 17.2 24.3 16 23C13.8 20.5 12 17.5 12 14Z" fill="#4D3820" stroke="#C9A84C" stroke-width="1.4"/>
+            <path d="M21 8.84C21 8.84 21 14 21 16" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          <div class="nav-logo-text">
+            <span class="ar">عيادة إشراقة</span>
+            <span class="en">Ishraqa Clinic</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          عيادة متخصصة بطب الأسنان والتجميل في بغداد - مدينة الصدر.
+          نسعى لتقديم أفضل خدمة طبية في بيئة مريحة ومتطورة.
+        </p>
+      </div>
+
+      <div>
+        <p class="footer-title">روابط سريعة</p>
+        <div class="footer-links">
+          <a href="index.html">الرئيسية</a>
+          <a href="#services">خدماتنا</a>
+          <a href="#doctors">أطباؤنا</a>
+          <a href="booking.html">احجز موعد</a>
+          <a href="admin.html">لوحة الإدارة</a>
+        </div>
+      </div>
+
+      <div class="footer-contact">
+        <p class="footer-title">تواصل معنا</p>
+        <p>📍 بغداد — مدينة الصدر</p>
+        <p>📞 <span id="footer-phone">تواصل معنا للحجز</span></p>
+        <p>🕐 السبت — الخميس: ١٠ص — ٨م</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© ٢٠٢٥ عيادة إشراقة للأسنان والتجميل</span>
+      <span>صُمِّم بعناية ❤️</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script>
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('navMobile');
+    hamburger.addEventListener('click', () => {
+      navMobile.classList.toggle('open');
+    });
+
+    // Close mobile menu on link click
+    navMobile.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => navMobile.classList.remove('open'));
+    });
+
+    // Set phone from config
+    const phoneEl = document.getElementById('footer-phone');
+    if (phoneEl && ISHRAQA_CONFIG.CLINIC_PHONE) {
+      phoneEl.textContent = ISHRAQA_CONFIG.CLINIC_PHONE;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="احجز موعدك في عيادة إشراقة للأسنان والتجميل — بغداد" />
+  <title>احجز موعدك — عيادة إشراقة</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/booking.css" />
+</head>
+<body>
+
+  <!-- LOADING OVERLAY -->
+  <div class="loading-overlay" id="loadingOverlay" role="status" aria-live="polite">
+    <div class="loader"></div>
+    <p>جارٍ إرسال حجزك…</p>
+  </div>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="19" cy="19" r="18" fill="#FAF6EE" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M12 14C12 10.686 14.686 8 18 8C19.1 8 20.14 8.3 21 8.84C21.86 8.3 22.9 8 24 8C27.314 8 30 10.686 30 14C30 17.5 28.2 20.5 26 23C24.8 24.3 23.4 25.8 22.6 27.8C22.3 28.5 21.7 29 21 29C20.3 29 19.7 28.5 19.4 27.8C18.6 25.8 17.2 24.3 16 23C13.8 20.5 12 17.5 12 14Z" fill="#F7D4DC" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M21 8.84C21 8.84 21 14 21 16" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="ar">عيادة إشراقة</span>
+        <span class="en">Ishraqa Clinic</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="index.html#services">خدماتنا</a>
+      <a href="index.html#doctors">أطباؤنا</a>
+      <a href="booking.html" class="nav-cta">📅 احجز موعد</a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="القائمة">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-mobile" id="navMobile">
+    <a href="index.html">الرئيسية</a>
+    <a href="index.html#services">خدماتنا</a>
+    <a href="index.html#doctors">أطباؤنا</a>
+    <a href="booking.html" style="color:var(--gold-dark);font-weight:700;">📅 احجز موعد</a>
+  </div>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero">
+    <div class="page-hero-content animate-in">
+      <div class="page-hero-eyebrow">✦ عيادة إشراقة ✦</div>
+      <h1>احجز موعدك</h1>
+      <p>أكمل النموذج أدناه وسيتواصل معك فريقنا لتأكيد موعدك في أقرب وقت</p>
+    </div>
+  </div>
+
+  <!-- BOOKING LAYOUT -->
+  <div class="booking-layout section">
+    <div class="booking-inner">
+
+      <!-- LEFT: Info sidebar -->
+      <aside class="booking-sidebar">
+        <div class="sidebar-card animate-in">
+          <div class="sidebar-icon">🕐</div>
+          <h3>أوقات الدوام</h3>
+          <div class="sidebar-schedule">
+            <div class="schedule-row">
+              <span>السبت — الخميس</span>
+              <span class="schedule-time">١٠ص — ٨م</span>
+            </div>
+            <div class="schedule-row">
+              <span>الجمعة</span>
+              <span class="schedule-time closed">مغلق</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card animate-in" style="animation-delay:0.1s">
+          <div class="sidebar-icon">👩‍⚕️</div>
+          <h3>أطباؤنا</h3>
+          <div class="sidebar-doctors">
+            <div class="sidebar-doc">
+              <div class="sidebar-doc-avatar">م</div>
+              <div>
+                <strong>د. منار</strong>
+                <small>أسنان وتجميل</small>
+              </div>
+            </div>
+            <div class="sidebar-doc">
+              <div class="sidebar-doc-avatar">ز</div>
+              <div>
+                <strong>د. زهراء</strong>
+                <small>أسنان وتجميل</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="sidebar-card sidebar-tip animate-in" style="animation-delay:0.2s">
+          <div class="sidebar-icon">💡</div>
+          <p>يمكنك اختيار <strong>طلب تأكيد</strong> إذا أردت أن يتواصل معك الفريق قبل تثبيت الموعد.</p>
+        </div>
+      </aside>
+
+      <!-- RIGHT: Form -->
+      <main class="booking-form-wrap">
+        <!-- Error Alert -->
+        <div class="alert alert-error" id="errorAlert" style="display:none; margin-bottom:var(--space-lg);" role="alert">
+          <span>⚠️</span>
+          <span id="errorMessage"></span>
+        </div>
+
+        <form id="bookingForm" class="booking-form" novalidate>
+
+          <!-- ── Section 1: Patient Info ── -->
+          <div class="form-section animate-in">
+            <div class="form-section-header">
+              <span class="form-section-num">١</span>
+              <div>
+                <h2 class="form-section-title">معلومات المريض</h2>
+                <p class="form-section-sub">الحقول المحددة بـ <span style="color:var(--gold)">*</span> مطلوبة</p>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label class="form-label" for="patientName">
+                  الاسم الكامل <span class="required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="patientName"
+                  name="patientName"
+                  class="form-control"
+                  placeholder="مثال: أحمد محمد الكعبي"
+                  autocomplete="name"
+                />
+                <span class="form-error">⚠ الرجاء إدخال الاسم الكامل</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="phone">
+                  رقم الهاتف <span class="required">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="form-control"
+                  placeholder="07XX XXX XXXX"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  dir="ltr"
+                />
+                <span class="form-error">⚠ رقم الهاتف مطلوب</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="age">
+                  العمر <span class="required">*</span>
+                </label>
+                <input
+                  type="number"
+                  id="age"
+                  name="age"
+                  class="form-control"
+                  placeholder="مثال: 28"
+                  min="1"
+                  max="120"
+                  inputmode="numeric"
+                />
+                <span class="form-error">⚠ الرجاء إدخال العمر</span>
+              </div>
+
+              <div class="form-group" id="genderGroup">
+                <label class="form-label">
+                  الجنس <span class="required">*</span>
+                </label>
+                <div class="radio-group radio-group-wrapper">
+                  <div class="radio-option">
+                    <input type="radio" id="genderMale" name="gender" value="male" />
+                    <label for="genderMale">♂ ذكر</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="genderFemale" name="gender" value="female" />
+                    <label for="genderFemale">♀ أنثى</label>
+                  </div>
+                </div>
+                <span class="form-error">⚠ الرجاء اختيار الجنس</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Section 2: Appointment ── -->
+          <div class="form-section animate-in" style="animation-delay:0.1s">
+            <div class="form-section-header">
+              <span class="form-section-num">٢</span>
+              <div>
+                <h2 class="form-section-title">تفاصيل الموعد</h2>
+                <p class="form-section-sub">اختر الخدمة والطبيب والوقت المناسب</p>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group" style="grid-column: 1 / -1;" id="doctorGroup">
+                <label class="form-label">
+                  اختيار الطبيب <span class="required">*</span>
+                </label>
+                <div class="radio-group radio-group-wrapper doctor-radio-group">
+                  <div class="radio-option doctor-option">
+                    <input type="radio" id="doctorManar" name="doctor" value="manar" />
+                    <label for="doctorManar">
+                      <span class="doctor-opt-avatar">م</span>
+                      <span>
+                        <strong>د. منار</strong>
+                        <small>أسنان وتجميل</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="radio-option doctor-option">
+                    <input type="radio" id="doctorZahraa" name="doctor" value="zahraa" />
+                    <label for="doctorZahraa">
+                      <span class="doctor-opt-avatar">ز</span>
+                      <span>
+                        <strong>د. زهراء</strong>
+                        <small>أسنان وتجميل</small>
+                      </span>
+                    </label>
+                  </div>
+                  <div class="radio-option doctor-option">
+                    <input type="radio" id="doctorNoPref" name="doctor" value="no_pref" />
+                    <label for="doctorNoPref">
+                      <span class="doctor-opt-avatar" style="background:var(--ivory-dark); color:var(--muted);">؟</span>
+                      <span>
+                        <strong>بدون تفضيل</strong>
+                        <small>أي طبيب متاح</small>
+                      </span>
+                    </label>
+                  </div>
+                </div>
+                <span class="form-error">⚠ الرجاء اختيار طبيب</span>
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="service">
+                  الخدمة المطلوبة <span class="required">*</span>
+                </label>
+                <select id="service" name="service" class="form-control">
+                  <option value="">— اختر الخدمة —</option>
+                  <!-- Populated dynamically from config -->
+                </select>
+                <span class="form-error">⚠ الرجاء اختيار الخدمة</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="bookingType">
+                  نوع الحجز <span class="required">*</span>
+                </label>
+                <select id="bookingType" name="bookingType" class="form-control">
+                  <option value="">— اختر نوع الحجز —</option>
+                  <option value="direct">حجز مباشر</option>
+                  <option value="request">طلب تأكيد</option>
+                </select>
+                <span class="form-error">⚠ الرجاء اختيار نوع الحجز</span>
+
+                <div class="booking-type-hint" id="bookingTypeHint" style="display:none;"></div>
+              </div>
+
+              <div class="form-group"></div>
+
+              <div class="form-group">
+                <label class="form-label" for="preferredDate">
+                  التاريخ المفضل <span class="required">*</span>
+                </label>
+                <input
+                  type="date"
+                  id="preferredDate"
+                  name="preferredDate"
+                  class="form-control"
+                  dir="ltr"
+                />
+                <span class="form-error">⚠ الرجاء اختيار التاريخ</span>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="preferredTime">
+                  الوقت المفضل <span class="required">*</span>
+                </label>
+                <select id="preferredTime" name="preferredTime" class="form-control">
+                  <option value="">— اختر الوقت —</option>
+                  <optgroup label="الصباح">
+                    <option value="10:00">١٠:٠٠ ص</option>
+                    <option value="10:30">١٠:٣٠ ص</option>
+                    <option value="11:00">١١:٠٠ ص</option>
+                    <option value="11:30">١١:٣٠ ص</option>
+                    <option value="12:00">١٢:٠٠ م</option>
+                  </optgroup>
+                  <optgroup label="بعد الظهر">
+                    <option value="14:00">٢:٠٠ م</option>
+                    <option value="14:30">٢:٣٠ م</option>
+                    <option value="15:00">٣:٠٠ م</option>
+                    <option value="15:30">٣:٣٠ م</option>
+                    <option value="16:00">٤:٠٠ م</option>
+                    <option value="16:30">٤:٣٠ م</option>
+                    <option value="17:00">٥:٠٠ م</option>
+                  </optgroup>
+                  <optgroup label="المساء">
+                    <option value="18:00">٦:٠٠ م</option>
+                    <option value="18:30">٦:٣٠ م</option>
+                    <option value="19:00">٧:٠٠ م</option>
+                    <option value="19:30">٧:٣٠ م</option>
+                    <option value="20:00">٨:٠٠ م</option>
+                  </optgroup>
+                </select>
+                <span class="form-error">⚠ الرجاء اختيار الوقت</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Section 3: Health Info ── -->
+          <div class="form-section animate-in" style="animation-delay:0.2s">
+            <div class="form-section-header">
+              <span class="form-section-num">٣</span>
+              <div>
+                <h2 class="form-section-title">الحالة الصحية</h2>
+                <p class="form-section-sub">معلومات تساعد طبيبك على تقديم أفضل رعاية</p>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label">هل تعاني من ألم حالياً؟</label>
+                <div class="radio-group">
+                  <div class="radio-option">
+                    <input type="radio" id="hasPainYes" name="hasPain" value="yes" />
+                    <label for="hasPainYes">😟 نعم</label>
+                  </div>
+                  <div class="radio-option">
+                    <input type="radio" id="hasPainNo" name="hasPain" value="no" checked />
+                    <label for="hasPainNo">😊 لا</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group" id="painLevelRow" style="display:none; grid-column: 1 / -1;">
+                <label class="form-label" for="painLevel">
+                  مستوى الألم: <strong id="painDisplay">١</strong>
+                </label>
+                <input
+                  type="range"
+                  id="painLevel"
+                  name="painLevel"
+                  class="pain-slider"
+                  min="1"
+                  max="5"
+                  value="1"
+                  step="1"
+                />
+                <div class="pain-labels">
+                  <span>١ خفيف</span>
+                  <span>٢</span>
+                  <span>٣ متوسط</span>
+                  <span>٤</span>
+                  <span>٥ شديد</span>
+                </div>
+              </div>
+
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label class="form-label" for="patientNotes">ملاحظات إضافية (اختياري)</label>
+                <textarea
+                  id="patientNotes"
+                  name="patientNotes"
+                  class="form-control"
+                  placeholder="أضف أي معلومات تريد إطلاع الطبيب عليها مسبقاً…"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Submit ── -->
+          <div class="form-submit-area animate-in" style="animation-delay:0.3s">
+            <div class="privacy-note">
+              🔒 بياناتك محفوظة وتُستخدم فقط لتنظيم موعدك في العيادة
+            </div>
+            <button type="submit" id="submitBtn" class="btn btn-primary btn-lg submit-btn">
+              <div class="spinner"></div>
+              <span class="btn-text">إرسال طلب الحجز ←</span>
+            </button>
+          </div>
+
+        </form>
+      </main>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer" style="margin-top: 0;">
+    <div class="footer-bottom" style="max-width:1100px; margin:0 auto; padding: var(--space-lg) 0; border:none; font-size:0.85rem; color:rgba(184,168,138,0.6);">
+      <span>© ٢٠٢٥ عيادة إشراقة — <a href="index.html" style="color:var(--gold-light); opacity:0.7;">الرئيسية</a></span>
+      <span>بغداد · مدينة الصدر</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/config.js"></script>
+  <script>
+    // Navbar
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+    const hamburger = document.getElementById('hamburger');
+    const navMobile = document.getElementById('navMobile');
+    hamburger.addEventListener('click', () => navMobile.classList.toggle('open'));
+    navMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navMobile.classList.remove('open')));
+
+    // Booking type hint
+    const bookingTypeSelect = document.getElementById('bookingType');
+    const bookingTypeHint   = document.getElementById('bookingTypeHint');
+    const hints = {
+      direct: '✅ سيتم تسجيل موعدك مباشرةً في الجدول.',
+      request: '📞 سيتواصل معك فريق العيادة لتأكيد وقت مناسب قبل تثبيت الموعد.'
+    };
+    bookingTypeSelect.addEventListener('change', () => {
+      const val = bookingTypeSelect.value;
+      if (hints[val]) {
+        bookingTypeHint.textContent = hints[val];
+        bookingTypeHint.style.display = 'block';
+      } else {
+        bookingTypeHint.style.display = 'none';
+      }
+    });
+  </script>
+  <script src="assets/js/booking.js"></script>
+</body>
+</html>

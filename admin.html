@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>لوحة الإدارة — عيادة إشراقة</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/admin.css" />
+</head>
+<body class="admin-body">
+
+  <!-- ═══════════════════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════════════════ -->
+  <aside class="admin-sidebar" id="adminSidebar">
+    <div class="sidebar-brand">
+      <svg width="32" height="32" viewBox="0 0 38 38" fill="none">
+        <circle cx="19" cy="19" r="18" fill="#3D3020" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M12 14C12 10.686 14.686 8 18 8C19.1 8 20.14 8.3 21 8.84C21.86 8.3 22.9 8 24 8C27.314 8 30 10.686 30 14C30 17.5 28.2 20.5 26 23C24.8 24.3 23.4 25.8 22.6 27.8C22.3 28.5 21.7 29 21 29C20.3 29 19.7 28.5 19.4 27.8C18.6 25.8 17.2 24.3 16 23C13.8 20.5 12 17.5 12 14Z" fill="#4D3820" stroke="#C9A84C" stroke-width="1.4"/>
+        <path d="M21 8.84L21 16" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div class="brand-name">إشراقة</div>
+        <div class="brand-sub">لوحة الإدارة</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="sidebar-link active" data-section="overview">
+        <span class="sidebar-link-icon">📊</span>
+        <span>نظرة عامة</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="bookings">
+        <span class="sidebar-link-icon">📅</span>
+        <span>الحجوزات</span>
+        <span class="sidebar-badge">12</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="patients">
+        <span class="sidebar-link-icon">👥</span>
+        <span>المرضى</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="doctors">
+        <span class="sidebar-link-icon">👩‍⚕️</span>
+        <span>الأطباء</span>
+      </a>
+      <a href="#" class="sidebar-link" data-section="settings">
+        <span class="sidebar-link-icon">⚙️</span>
+        <span>الإعدادات</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <a href="index.html" class="sidebar-link">
+        <span class="sidebar-link-icon">🌐</span>
+        <span>الموقع العام</span>
+      </a>
+      <a href="booking.html" class="sidebar-link">
+        <span class="sidebar-link-icon">📝</span>
+        <span>صفحة الحجز</span>
+      </a>
+      <!-- AUTH PLACEHOLDER: Login/logout button will be added here -->
+      <!-- <button class="sidebar-link logout-btn"><span>🔒</span> تسجيل الخروج</button> -->
+    </div>
+  </aside>
+
+  <!-- ═══════════════════════════════════════════════════
+       MAIN CONTENT
+  ═══════════════════════════════════════════════════ -->
+  <div class="admin-main">
+
+    <!-- TOP BAR -->
+    <header class="admin-topbar">
+      <div class="topbar-right">
+        <button class="sidebar-toggle" id="sidebarToggle" aria-label="Toggle sidebar">
+          ☰
+        </button>
+        <div class="topbar-breadcrumb">
+          <span>الرئيسية</span>
+          <span class="breadcrumb-sep">/</span>
+          <span class="breadcrumb-current" id="currentSection">نظرة عامة</span>
+        </div>
+      </div>
+      <div class="topbar-left">
+        <div class="topbar-date" id="topbarDate"></div>
+        <div class="topbar-user">
+          <div class="topbar-user-avatar">إ</div>
+          <div class="topbar-user-info">
+            <span class="topbar-user-name">المدير</span>
+            <span class="topbar-user-role">مدير النظام</span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ─── CONTENT AREA ─────────────────────────────── -->
+    <div class="admin-content">
+
+      <!-- DEV NOTICE -->
+      <div class="alert alert-info" style="margin-bottom:var(--space-lg);">
+        <span>ℹ️</span>
+        <span>
+          هذه لوحة إدارة تجريبية بيانات ثابتة. لربطها بـ Google Sheets أو n8n،
+          قم بتحديث دالة <strong>loadDashboardData()</strong> في <code>admin.js</code>.
+        </span>
+      </div>
+
+      <!-- ── STAT CARDS ── -->
+      <div class="stats-grid stagger-children" id="statsGrid">
+        <div class="stat-card">
+          <div class="stat-icon gold">📅</div>
+          <div class="stat-body">
+            <div class="stat-value" id="statNewBookings">12</div>
+            <div class="stat-label">حجوزات جديدة</div>
+            <div class="stat-change up">↑ 3 هذا الأسبوع</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon green">✅</div>
+          <div class="stat-body">
+            <div class="stat-value" id="statConfirmed">8</div>
+            <div class="stat-label">مواعيد مؤكدة</div>
+            <div class="stat-change up">↑ 2 اليوم</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon gold">🏥</div>
+          <div class="stat-body">
+            <div class="stat-value" id="statCompleted">47</div>
+            <div class="stat-label">زيارات مكتملة</div>
+            <div class="stat-change up">↑ 5 هذا الشهر</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon pink">👥</div>
+          <div class="stat-body">
+            <div class="stat-value" id="statReturning">19</div>
+            <div class="stat-label">مرضى عائدون</div>
+            <div class="stat-change up">↑ 40%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CHARTS ROW ── -->
+      <div class="dashboard-row">
+        <!-- Mini chart placeholder -->
+        <div class="card dashboard-chart-card">
+          <div class="card-header">
+            <div>
+              <h3 class="card-title">الحجوزات هذا الأسبوع</h3>
+              <p class="card-subtitle">توزيع الحجوزات على أيام الأسبوع</p>
+            </div>
+            <span class="badge badge-new">هذا الأسبوع</span>
+          </div>
+          <div class="mini-chart" id="weekChart">
+            <!-- Bar chart rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="card quick-actions-card">
+          <div class="card-header">
+            <h3 class="card-title">إجراءات سريعة</h3>
+          </div>
+          <div class="quick-actions">
+            <a href="booking.html" class="quick-action-btn">
+              <span class="qa-icon">📝</span>
+              <span>إضافة حجز يدوي</span>
+            </a>
+            <button class="quick-action-btn" onclick="refreshData()">
+              <span class="qa-icon">🔄</span>
+              <span>تحديث البيانات</span>
+            </button>
+            <button class="quick-action-btn" onclick="exportCSV()">
+              <span class="qa-icon">📥</span>
+              <span>تصدير CSV</span>
+            </button>
+            <button class="quick-action-btn" onclick="printView()">
+              <span class="qa-icon">🖨️</span>
+              <span>طباعة التقرير</span>
+            </button>
+          </div>
+
+          <!-- Webhook status -->
+          <div class="webhook-status" id="webhookStatus">
+            <div class="ws-label">حالة الـ Webhook</div>
+            <div class="ws-value" id="wsValue">
+              <span class="ws-dot" id="wsDot"></span>
+              <span id="wsText">جارٍ الفحص…</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── RECENT BOOKINGS TABLE ── -->
+      <div class="card table-card">
+        <div class="card-header">
+          <div>
+            <h3 class="card-title">آخر الحجوزات</h3>
+            <p class="card-subtitle">أحدث طلبات الحجز المستلمة</p>
+          </div>
+          <div class="table-controls">
+            <input type="text" class="form-control" id="tableSearch" placeholder="بحث عن مريض…" style="width:200px; padding:0.5rem 0.9rem; font-size:0.85rem;" />
+            <select class="form-control" id="statusFilter" style="width:140px; padding:0.5rem 0.9rem; font-size:0.85rem; padding-inline-start:2rem;">
+              <option value="">كل الحالات</option>
+              <option value="new">جديد</option>
+              <option value="confirmed">مؤكد</option>
+              <option value="completed">مكتمل</option>
+              <option value="pending">معلق</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="table-wrapper" style="border:none; box-shadow:none; border-radius:0;">
+          <table class="data-table" id="bookingsTable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>المريض</th>
+                <th>الهاتف</th>
+                <th>الخدمة</th>
+                <th>الطبيب</th>
+                <th>الموعد</th>
+                <th>نوع الحجز</th>
+                <th>الحالة</th>
+                <th>إجراءات</th>
+              </tr>
+            </thead>
+            <tbody id="bookingsBody">
+              <!-- Populated by JS -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-footer">
+          <span class="table-count" id="tableCount">عرض 0 من 0 حجز</span>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+
+      <!-- ── DOCTORS WORKLOAD ── -->
+      <div class="dashboard-row">
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">عبء عمل الأطباء</h3>
+          </div>
+          <div class="doctors-workload">
+            <div class="workload-item">
+              <div class="workload-header">
+                <div class="workload-doctor">
+                  <div class="workload-avatar">م</div>
+                  <span>د. منار</span>
+                </div>
+                <span class="workload-count">7 مواعيد</span>
+              </div>
+              <div class="workload-bar-wrap">
+                <div class="workload-bar" style="width:70%; background:linear-gradient(to left, var(--gold-light), var(--gold-dark));"></div>
+              </div>
+            </div>
+            <div class="workload-item">
+              <div class="workload-header">
+                <div class="workload-doctor">
+                  <div class="workload-avatar" style="background:linear-gradient(135deg,var(--pink-light),var(--gold-pale));">ز</div>
+                  <span>د. زهراء</span>
+                </div>
+                <span class="workload-count">5 مواعيد</span>
+              </div>
+              <div class="workload-bar-wrap">
+                <div class="workload-bar" style="width:50%; background:linear-gradient(to left, var(--pink-light), var(--pink));"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">الخدمات الأكثر طلباً</h3>
+          </div>
+          <div class="services-ranking" id="servicesRanking">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

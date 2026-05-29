@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="تم استلام حجزك بنجاح — عيادة إشراقة" />
+  <title>تم الحجز — عيادة إشراقة</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <style>
+    /* ── Thank You Page Styles ── */
+    .ty-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(150deg, var(--ivory) 0%, var(--cream) 50%, var(--pink-pale) 100%);
+      padding: 80px var(--space-xl) var(--space-3xl);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Background shapes */
+    .ty-page::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      inset-inline-end: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(201,168,76,0.12), transparent 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .ty-page::after {
+      content: '';
+      position: absolute;
+      bottom: -50px;
+      inset-inline-start: -50px;
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(232,160,176,0.15), transparent 70%);
+      border-radius: 50%;
+      filter: blur(40px);
+      pointer-events: none;
+    }
+
+    .ty-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Checkmark animation */
+    .ty-check-wrap {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--success-light), #A9DFBF);
+      border: 3px solid var(--success);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto var(--space-xl);
+      animation: scaleIn 0.5s var(--transition-spring) forwards;
+      box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.4);
+      animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                 glow 2s ease 0.5s infinite;
+    }
+
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
+      50%       { box-shadow: 0 0 0 12px rgba(39, 174, 96, 0.12); }
+    }
+
+    .ty-check {
+      font-size: 2.5rem;
+    }
+
+    .ty-eyebrow {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-family: var(--font-display);
+      font-style: italic;
+      margin-bottom: var(--space-md);
+      animation: fadeInUp 0.5s ease 0.2s both;
+    }
+
+    .ty-title {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: var(--space-md);
+      line-height: 1.2;
+      animation: fadeInUp 0.5s ease 0.3s both;
+    }
+
+    .ty-subtitle {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: var(--space-xl);
+      animation: fadeInUp 0.5s ease 0.4s both;
+    }
+
+    /* Booking summary card */
+    .ty-summary {
+      background: var(--white);
+      border: 1.5px solid var(--border-light);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      box-shadow: var(--shadow-lg);
+      margin-bottom: var(--space-xl);
+      text-align: right;
+      animation: fadeInUp 0.5s ease 0.5s both;
+    }
+
+    .ty-summary-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: var(--space-md);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .ty-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border-light);
+      font-size: 0.9rem;
+    }
+
+    .ty-row:last-child { border-bottom: none; }
+
+    .ty-row-label { color: var(--muted); font-size: 0.82rem; }
+    .ty-row-value { color: var(--dark-soft); font-weight: 600; }
+
+    /* Booking type badge */
+    .ty-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+    }
+
+    .ty-type-badge.direct  { background: var(--success-light); color: var(--success); }
+    .ty-type-badge.request { background: #FEF9E7; color: #B7950B; }
+
+    /* Actions */
+    .ty-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      justify-content: center;
+      animation: fadeInUp 0.5s ease 0.6s both;
+    }
+
+    /* Confetti particles */
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 2px;
+      top: -20px;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Reference number */
+    .ty-ref {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-pale);
+      border: 1px solid var(--gold-light);
+      border-radius: var(--radius-full);
+      padding: 6px 18px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-dark);
+      margin-bottom: var(--space-lg);
+      animation: fadeInUp 0.5s ease 0.35s both;
+      font-family: var(--font-display);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti canvas -->
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+
+  <!-- NAVBAR (minimal) -->
+  <nav class="navbar" id="navbar">
+    <a href="index.html" class="nav-logo">
+      <svg class="nav-logo-icon" viewBox="0 0 38 38" fill="none">
+        <circle cx="19" cy="19" r="18" fill="#FAF6EE" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M12 14C12 10.686 14.686 8 18 8C19.1 8 20.14 8.3 21 8.84C21.86 8.3 22.9 8 24 8C27.314 8 30 10.686 30 14C30 17.5 28.2 20.5 26 23C24.8 24.3 23.4 25.8 22.6 27.8C22.3 28.5 21.7 29 21 29C20.3 29 19.7 28.5 19.4 27.8C18.6 25.8 17.2 24.3 16 23C13.8 20.5 12 17.5 12 14Z" fill="#F7D4DC" stroke="#C9A84C" stroke-width="1.4"/>
+        <path d="M21 8.84L21 16" stroke="#C9A84C" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>
+      <div class="nav-logo-text">
+        <span class="ar">عيادة إشراقة</span>
+        <span class="en">Ishraqa Clinic</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">الرئيسية</a>
+      <a href="booking.html" class="nav-cta">📅 حجز جديد</a>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="ty-page">
+    <div class="ty-content">
+      <div class="ty-check-wrap">
+        <span class="ty-check">✓</span>
+      </div>
+
+      <div class="ty-eyebrow">✦ طلبك وصلنا ✦</div>
+      <h1 class="ty-title">تم استلام حجزك بنجاح!</h1>
+      <p class="ty-subtitle" id="tySubtitle">
+        شكراً لك! سيتواصل معك فريق عيادة إشراقة قريباً لتأكيد موعدك.
+      </p>
+
+      <!-- Reference number -->
+      <div class="ty-ref" id="tyRef">
+        🔖 رقم الطلب: <span id="refNumber">—</span>
+      </div>
+
+      <!-- Booking summary (populated from URL params) -->
+      <div class="ty-summary" id="tySummary" style="display:none;">
+        <div class="ty-summary-title">📋 ملخص الحجز</div>
+        <div id="summaryRows"></div>
+      </div>
+
+      <div class="ty-actions">
+        <a href="booking.html" class="btn btn-primary">
+          📅 حجز موعد آخر
+        </a>
+        <a href="index.html" class="btn btn-outline">
+          العودة للرئيسية
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/config.js"></script>
+  <script>
+    // ── Navbar scroll ──────────────────────────────────────────
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 20));
+
+    // ── Read URL params ────────────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    const bookingData = {
+      name:    params.get('name')    || '',
+      service: params.get('service') || '',
+      date:    params.get('date')    || '',
+      time:    params.get('time')    || '',
+      type:    params.get('type')    || '',
+    };
+
+    // ── Generate simple reference number ──────────────────────
+    const refNum = 'ISH-' + Date.now().toString().slice(-6);
+    document.getElementById('refNumber').textContent = refNum;
+
+    // ── Booking type–specific subtitle ────────────────────────
+    const subtitle = document.getElementById('tySubtitle');
+    if (bookingData.type && bookingData.type.includes('مباشر')) {
+      subtitle.textContent = 'تم تسجيل موعدك مباشرةً. سنتواصل معك للتأكيد النهائي.';
+    } else if (bookingData.type) {
+      subtitle.textContent = 'سيتواصل معك فريق عيادة إشراقة قريباً لتأكيد وقت مناسب.';
+    }
+
+    // ── Populate summary card ──────────────────────────────────
+    const rows = [];
+    if (bookingData.name)    rows.push({ label: 'اسم المريض',    value: bookingData.name });
+    if (bookingData.service) rows.push({ label: 'الخدمة',         value: bookingData.service });
+    if (bookingData.date)    rows.push({ label: 'التاريخ المفضل', value: bookingData.date });
+    if (bookingData.time) {
+      // Format 24h to simple display
+      const [h, m] = bookingData.time.split(':');
+      const hr = parseInt(h, 10);
+      const ampm = hr >= 12 ? 'م' : 'ص';
+      const hr12 = hr > 12 ? hr - 12 : (hr === 0 ? 12 : hr);
+      rows.push({ label: 'الوقت المفضل', value: `${hr12}:${m} ${ampm}` });
+    }
+    if (bookingData.type) {
+      const isDirect = bookingData.type.includes('مباشر');
+      rows.push({
+        label: 'نوع الحجز',
+        value: `<span class="ty-type-badge ${isDirect ? 'direct' : 'request'}">${isDirect ? '✅' : '📞'} ${bookingData.type}</span>`,
+        isHTML: true
+      });
+    }
+
+    if (rows.length > 0) {
+      const summaryEl = document.getElementById('tySummary');
+      const rowsEl    = document.getElementById('summaryRows');
+      summaryEl.style.display = 'block';
+      rowsEl.innerHTML = rows.map(r => `
+        <div class="ty-row">
+          <span class="ty-row-label">${r.label}</span>
+          <span class="ty-row-value">${r.isHTML ? r.value : r.value}</span>
+        </div>
+      `).join('');
+    }
+
+    // ── Confetti ───────────────────────────────────────────────
+    function launchConfetti() {
+      const container = document.getElementById('confetti');
+      const colors = ['#C9A84C', '#E8A0B0', '#F7D4DC', '#F5E9C8', '#E8C97A', '#fff'];
+      const count = 60;
+
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.cssText = `
+          left: ${Math.random() * 100}%;
+          background: ${colors[Math.floor(Math.random() * colors.length)]};
+          width: ${6 + Math.random() * 6}px;
+          height: ${6 + Math.random() * 10}px;
+          border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
+          animation-duration: ${2 + Math.random() * 3}s;
+          animation-delay: ${Math.random() * 1.5}s;
+          opacity: ${0.7 + Math.random() * 0.3};
+        `;
+        container.appendChild(piece);
+      }
+
+      // Clean up after animation
+      setTimeout(() => {
+        container.innerHTML = '';
+      }, 6000);
+    }
+
+    // Launch confetti after a short delay
+    setTimeout(launchConfetti, 300);
+  </script>
+</body>
+</html>
