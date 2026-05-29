@@ -15,7 +15,7 @@ const ISHRAQA_CONFIG = {
 
   // ─── n8n Webhook URL ───────────────────────────────────────
   // Paste your n8n webhook URL here:
-  WEBHOOK_URL: "https://great7muntadher.app.n8n.cloud/webhook-test/booking",
+  WEBHOOK_URL: "https://great7muntadher.app.n8n.cloud/webhook/booking",
 
   // ─── Clinic Info ───────────────────────────────────────────
   CLINIC_NAME: "Ishraqa Dental & Aesthetic Clinic",
