@@ -1,0 +1,283 @@
+/* ================================================================
+   Booking Page Styles — Ishraqa Clinic
+   ================================================================ */
+
+/* ── Layout ───────────────────────────────────────────────────── */
+.booking-layout {
+  background: var(--cream);
+  padding-top: var(--space-xl);
+}
+
+.booking-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+.booking-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  position: sticky;
+  top: 90px;
+}
+
+.sidebar-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-icon {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.sidebar-card h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: var(--space-md);
+}
+
+.sidebar-schedule { display: flex; flex-direction: column; gap: 8px; }
+
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+.schedule-time {
+  font-weight: 700;
+  color: var(--dark-soft);
+  font-size: 0.82rem;
+}
+
+.schedule-time.closed { color: var(--error); }
+
+.sidebar-doctors { display: flex; flex-direction: column; gap: var(--space-sm); }
+
+.sidebar-doc {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px;
+  border-radius: var(--radius-sm);
+  background: var(--ivory);
+}
+
+.sidebar-doc-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-pale), var(--pink-pale));
+  border: 1.5px solid var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  color: var(--gold-dark);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.sidebar-doc strong { display: block; font-size: 0.875rem; color: var(--dark); }
+.sidebar-doc small  { font-size: 0.75rem; color: var(--muted); }
+
+.sidebar-tip {
+  background: linear-gradient(135deg, var(--gold-pale), var(--pink-pale));
+  border-color: var(--gold-pale);
+}
+
+.sidebar-tip p { font-size: 0.85rem; color: var(--dark-soft); line-height: 1.6; }
+.sidebar-tip strong { color: var(--gold-dark); }
+
+/* ── Form Wrap ────────────────────────────────────────────────── */
+.booking-form-wrap {
+  /* Intentionally unstyled — form-section cards handle the look */
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* ── Form Sections ────────────────────────────────────────────── */
+.form-section {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.form-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--border-light);
+}
+
+.form-section-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-gold);
+}
+
+.form-section-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+
+.form-section-sub {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* ── Form Grid ────────────────────────────────────────────────── */
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+/* ── Doctor Radio Options ─────────────────────────────────────── */
+.doctor-radio-group {
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.doctor-option { flex: 1; min-width: 160px; }
+
+.doctor-option label {
+  display: flex !important;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-md) var(--space-md) !important;
+  border-radius: var(--radius-md) !important;
+  border: 1.5px solid var(--border);
+  background: var(--ivory);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  height: 100%;
+}
+
+.doctor-option label strong { display: block; font-size: 0.9rem; color: var(--dark); }
+.doctor-option label small  { font-size: 0.75rem; color: var(--muted); }
+
+.doctor-option input:checked + label {
+  border-color: var(--gold);
+  background: var(--gold-pale);
+}
+
+.doctor-opt-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pink-light), var(--gold-pale));
+  border: 1.5px solid var(--gold-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  color: var(--gold-dark);
+  flex-shrink: 0;
+}
+
+/* ── Booking Type Hint ────────────────────────────────────────── */
+.booking-type-hint {
+  margin-top: 8px;
+  padding: 10px 14px;
+  background: var(--gold-pale);
+  border: 1px solid var(--gold-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  color: var(--gold-dark);
+  animation: slideDown 0.2s ease;
+}
+
+/* ── Submit Area ──────────────────────────────────────────────── */
+.form-submit-area {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.privacy-note {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-align: center;
+}
+
+.submit-btn {
+  width: 100%;
+  max-width: 400px;
+  justify-content: center;
+  font-size: 1.05rem;
+  padding: 1rem 2rem;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .booking-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .booking-sidebar {
+    position: static;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  .sidebar-tip { grid-column: 1 / -1; }
+}
+
+@media (max-width: 600px) {
+  .booking-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid-2 .form-group[style*="grid-column"] {
+    grid-column: 1 !important;
+  }
+
+  .doctor-option { min-width: 100%; }
+
+  .form-section { padding: var(--space-lg); }
+  .form-section-header { flex-direction: column; gap: var(--space-sm); }
+}
