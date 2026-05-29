@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>مركز قيادة المشروع — عيادة إشراقة</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/orchestrator.css" />
+</head>
+<body class="orch-body">
+
+<!-- ═══════════════════════════════════════════════════
+     TOAST
+═══════════════════════════════════════════════════ -->
+<div class="orch-toast" id="orchToast"></div>
+
+<!-- ═══════════════════════════════════════════════════
+     HIDDEN FILE INPUT (import)
+═══════════════════════════════════════════════════ -->
+<input type="file" id="importFileInput" accept=".json" />
+
+<!-- ═══════════════════════════════════════════════════
+     SIDEBAR
+═══════════════════════════════════════════════════ -->
+<aside class="orch-sidebar" id="orchSidebar">
+  <div class="orch-sidebar-brand">
+    <div class="orch-brand-icon">⚙</div>
+    <div class="orch-brand-text">
+      <div class="name">مركز القيادة</div>
+      <div class="sub">Project Orchestrator</div>
+    </div>
+  </div>
+
+  <nav class="orch-nav">
+    <div class="orch-nav-section-label">لوحة التحكم</div>
+    <a href="#orchOverview" class="orch-link active">
+      <span class="orch-link-icon">📊</span>
+      <span>نظرة عامة</span>
+    </a>
+    <a href="#orchNextActionSection" class="orch-link">
+      <span class="orch-link-icon">🎯</span>
+      <span>الإجراء التالي</span>
+    </a>
+    <a href="#orchTasksSection" class="orch-link">
+      <span class="orch-link-icon">✅</span>
+      <span>المهام</span>
+    </a>
+
+    <div class="orch-nav-section-label">الأدوات</div>
+    <a href="#orchInputsSection" class="orch-link">
+      <span class="orch-link-icon">🔑</span>
+      <span>المعلومات المطلوبة</span>
+    </a>
+    <a href="#orchPromptsSection" class="orch-link">
+      <span class="orch-link-icon">💬</span>
+      <span>مولّد الـ Prompts</span>
+    </a>
+    <a href="#orchTelegramSection" class="orch-link">
+      <span class="orch-link-icon">📨</span>
+      <span>رسائل تيليغرام</span>
+    </a>
+
+    <div class="orch-nav-section-label">المشروع</div>
+    <a href="#orchHealthSection" class="orch-link">
+      <span class="orch-link-icon">🔍</span>
+      <span>صحة سير العمل</span>
+    </a>
+    <a href="#orchRoadmapSection" class="orch-link">
+      <span class="orch-link-icon">🗺</span>
+      <span>خارطة الطريق</span>
+    </a>
+  </nav>
+
+  <div class="orch-sidebar-footer">
+    <a href="admin.html" class="orch-link">
+      <span class="orch-link-icon">📋</span>
+      <span>لوحة الإدارة</span>
+    </a>
+    <a href="index.html" class="orch-link">
+      <span class="orch-link-icon">🌐</span>
+      <span>الموقع العام</span>
+    </a>
+    <a href="booking.html" class="orch-link" target="_blank">
+      <span class="orch-link-icon">📅</span>
+      <span>صفحة الحجز</span>
+    </a>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════
+     MAIN
+═══════════════════════════════════════════════════ -->
+<div class="orch-main">
+
+  <!-- TOP BAR -->
+  <header class="orch-topbar">
+    <div class="orch-topbar-right">
+      <button class="orch-sidebar-toggle" id="orchSidebarToggle" aria-label="القائمة">☰</button>
+      <div class="orch-breadcrumb">
+        <span>عيادة إشراقة</span>
+        <span class="orch-breadcrumb-sep">/</span>
+        <span>مركز قيادة المشروع</span>
+      </div>
+    </div>
+    <div class="orch-topbar-left">
+      <div class="orch-phase-badge">
+        <div class="orch-phase-dot"></div>
+        <span id="orchCurrentPhase">MVP Booking Stabilization</span>
+      </div>
+      <div class="orch-live-clock" id="orchClock">—</div>
+    </div>
+  </header>
+
+  <!-- CONTENT -->
+  <div class="orch-content">
+
+    <!-- ── SECURITY BANNER ── -->
+    <div class="orch-security-banner">
+      <span class="orch-security-banner-icon">🔐</span>
+      <span>
+        <strong>تحذير:</strong>
+        هذه الصفحة أداة إدارة مشروع داخلية وليست لوحة آمنة للبيانات الحساسة.
+        لا تخزّن Bot Tokens أو كلمات مرور حقيقية هنا — استخدم n8n Credentials لذلك.
+      </span>
+    </div>
+
+    <!-- ── STATE BAR ── -->
+    <div class="orch-state-bar">
+      <span class="orch-state-bar-label" id="orchLastUpdated">آخر تحديث: —</span>
+      <button class="orch-btn orch-btn-outline" style="font-size:0.78rem;" onclick="orchExportState()">
+        📥 تصدير الحالة JSON
+      </button>
+      <button class="orch-btn orch-btn-ghost" style="font-size:0.78rem;" onclick="orchImportTrigger()">
+        📤 استيراد JSON
+      </button>
+      <button class="orch-btn orch-btn-danger" style="font-size:0.78rem;" onclick="orchResetState()">
+        ↺ إعادة الضبط
+      </button>
+    </div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 1: OVERVIEW
+    ════════════════════════════════════════════════ -->
+    <div id="orchOverview" class="orch-section">
+      <div class="orch-section-header">
+        <div>
+          <div class="orch-section-title">
+            <div class="orch-section-title-icon">📊</div>
+            نظرة عامة على المشروع
+          </div>
+          <div class="orch-section-sub">عيادة إشراقة للأسنان والتجميل — Ishraqa Dental & Aesthetic Clinic</div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="orch-stats-grid" id="orchStatsGrid"></div>
+
+      <!-- Progress bar -->
+      <div class="orch-progress-wrap">
+        <span style="font-size:0.78rem; color:rgba(212,196,160,0.4);">تقدم المشروع الكلي</span>
+        <div class="orch-progress-bar">
+          <div class="orch-progress-fill" id="orchProgressFill" style="width:0%"></div>
+        </div>
+        <span class="orch-progress-label" id="orchProgressLabel">0%</span>
+      </div>
+
+      <!-- Stack info -->
+      <div class="orch-two-col" style="margin-top:var(--space-lg);">
+        <div class="orch-card">
+          <div class="orch-card-header">
+            <div class="orch-card-title">🔧 التقنيات المستخدمة</div>
+          </div>
+          <div class="orch-card-body">
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; border-bottom:1px solid rgba(201,168,76,0.07); padding-bottom:8px;">
+                <span style="color:rgba(212,196,160,0.45);">Frontend</span>
+                <span>GitHub Pages + Vanilla JS</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; border-bottom:1px solid rgba(201,168,76,0.07); padding-bottom:8px;">
+                <span style="color:rgba(212,196,160,0.45);">Automation</span>
+                <span>n8n Cloud</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; border-bottom:1px solid rgba(201,168,76,0.07); padding-bottom:8px;">
+                <span style="color:rgba(212,196,160,0.45);">Database</span>
+                <span>Google Sheets (MVP)</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; border-bottom:1px solid rgba(201,168,76,0.07); padding-bottom:8px;">
+                <span style="color:rgba(212,196,160,0.45);">Notifications</span>
+                <span>Telegram</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem;">
+                <span style="color:rgba(212,196,160,0.45);">Future</span>
+                <span style="color:rgba(212,196,160,0.35);">WhatsApp (Phase 5)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="orch-card">
+          <div class="orch-card-header">
+            <div class="orch-card-title">🔗 روابط المشروع</div>
+          </div>
+          <div class="orch-card-body">
+            <div style="display:flex; flex-direction:column; gap:10px;">
+              <div>
+                <div style="font-size:0.72rem; color:rgba(212,196,160,0.4); margin-bottom:4px;">الموقع الحي</div>
+                <a href="https://greatmuntadher.github.io/Ishraqa_Clinic/index.html" target="_blank"
+                   style="font-size:0.8rem; color:var(--gold-light); word-break:break-all; direction:ltr; display:block;">
+                  greatmuntadher.github.io/Ishraqa_Clinic
+                </a>
+              </div>
+              <div>
+                <div style="font-size:0.72rem; color:rgba(212,196,160,0.4); margin-bottom:4px;">صفحة الحجز</div>
+                <a href="https://greatmuntadher.github.io/Ishraqa_Clinic/booking.html" target="_blank"
+                   style="font-size:0.8rem; color:var(--gold-light); word-break:break-all; direction:ltr; display:block;">
+                  /booking.html
+                </a>
+              </div>
+              <div>
+                <div style="font-size:0.72rem; color:rgba(212,196,160,0.4); margin-bottom:4px;">n8n Webhook URL</div>
+                <span style="font-size:0.78rem; color:rgba(212,196,160,0.5); direction:ltr; display:block; word-break:break-all;">
+                  great7muntadher.app.n8n.cloud/webhook/booking
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 2: NEXT BEST ACTION
+    ════════════════════════════════════════════════ -->
+    <div id="orchNextActionSection" class="orch-section">
+      <div class="orch-section-header">
+        <div class="orch-section-title">
+          <div class="orch-section-title-icon">🎯</div>
+          الإجراء التالي الأمثل
+        </div>
+      </div>
+      <div id="orchNextAction" class="orch-next-action">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 3: TASKS
+    ════════════════════════════════════════════════ -->
+    <div id="orchTasksSection" class="orch-section">
+      <div class="orch-section-header">
+        <div>
+          <div class="orch-section-title">
+            <div class="orch-section-title-icon">✅</div>
+            مهام المشروع
+          </div>
+          <div class="orch-section-sub">انقر على دائرة الحالة لتغييرها • انقر "الـ Prompt" لعرض التعليمات</div>
+        </div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap;">
+          <span style="font-size:0.72rem; padding:3px 8px; border-radius:var(--radius-full); background:rgba(46,204,113,0.1); color:#2ECC71; border:1px solid rgba(46,204,113,0.2);">✓ مكتمل</span>
+          <span style="font-size:0.72rem; padding:3px 8px; border-radius:var(--radius-full); background:rgba(52,152,219,0.1); color:#3498DB; border:1px solid rgba(52,152,219,0.2);">◉ جاري</span>
+          <span style="font-size:0.72rem; padding:3px 8px; border-radius:var(--radius-full); background:rgba(231,76,60,0.1); color:#E74C3C; border:1px solid rgba(231,76,60,0.2);">⊘ محظور</span>
+          <span style="font-size:0.72rem; padding:3px 8px; border-radius:var(--radius-full); background:rgba(201,168,76,0.08); color:rgba(201,168,76,0.6); border:1px solid rgba(201,168,76,0.15);">○ معلق</span>
+        </div>
+      </div>
+
+      <div class="orch-card">
+        <div class="orch-card-body" style="padding:var(--space-md);">
+          <div class="orch-task-list" id="orchTaskList">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 4: MANUAL INPUTS NEEDED
+    ════════════════════════════════════════════════ -->
+    <div id="orchInputsSection" class="orch-section">
+      <div class="orch-section-header">
+        <div>
+          <div class="orch-section-title">
+            <div class="orch-section-title-icon">🔑</div>
+            المعلومات اليدوية المطلوبة
+          </div>
+          <div class="orch-section-sub">
+            هذه المعلومات لا يمكن للبرنامج توليدها — يجب أن تأتي منك شخصياً
+          </div>
+        </div>
+      </div>
+
+      <div class="orch-security-banner" style="margin-bottom:var(--space-lg);">
+        <span class="orch-security-banner-icon">⚠️</span>
+        <span>
+          <strong>لا تخزّن Bot Tokens الحقيقية هنا.</strong>
+          هذه الصفحة تُخزّن في localStorage في المتصفح وليست آمنة.
+          استخدم n8n Credentials لتخزين المفاتيح الحساسة في الإنتاج.
+        </span>
+      </div>
+
+      <div class="orch-inputs-grid" id="orchInputsGrid">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 5: PROMPT GENERATOR
+    ════════════════════════════════════════════════ -->
+    <div id="orchPromptsSection" class="orch-section">
+      <div class="orch-section-header">
+        <div>
+          <div class="orch-section-title">
+            <div class="orch-section-title-icon">💬</div>
+            مولّد الـ Prompts
+          </div>
+          <div class="orch-section-sub">اختر العميل ثم المهمة لعرض ونسخ الـ prompt المناسب</div>
+        </div>
+        <div class="orch-prompt-tabs">
+          <button class="orch-tab-btn n8n active" data-agent="n8n">⚙️ n8n Agent</button>
+          <button class="orch-tab-btn claude" data-agent="claude">💙 Claude Code</button>
+          <button class="orch-tab-btn chatgpt" data-agent="chatgpt">🟢 ChatGPT</button>
+        </div>
+      </div>
+
+      <div class="orch-two-col">
+        <!-- Left: prompt list -->
+        <div class="orch-card">
+          <div class="orch-card-header">
+            <div class="orch-card-title">📋 قائمة المهام</div>
+          </div>
+          <div class="orch-card-body" style="padding:var(--space-sm);">
+            <div class="orch-prompt-list" id="orchPromptList">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: prompt output -->
+        <div class="orch-card">
+          <div class="orch-card-header">
+            <div class="orch-card-title">📝 نص الـ Prompt</div>
+            <button class="orch-copy-btn" id="orchPromptCopyAllBtn">📋 نسخ الكل</button>
+          </div>
+          <div class="orch-card-body" style="padding:0;">
+            <div class="orch-prompt-output" id="orchPromptOutput"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 6: TELEGRAM ALERT DRAFT
+    ════════════════════════════════════════════════ -->
+    <div id="orchTelegramSection" class="orch-section">
+      <div class="orch-section-header">
+        <div>
+          <div class="orch-section-title">
+            <div class="orch-section-title-icon">📨</div>
+            مسوّدة رسائل التيليغرام
+          </div>
+          <div class="orch-section-sub">توليد رسائل تنبيه عربية لإرسالها للمدير عند الحاجة لتدخل يدوي</div>
+        </div>
+      </div>
+
+      <div class="orch-card">
+        <div class="orch-card-body">
+          <div class="orch-telegram-wrap">
+            <div>
+              <div style="font-size:0.78rem; color:rgba(212,196,160,0.4); margin-bottom:var(--space-sm);">
+                اختر معلومة مطلوبة:
+              </div>
+              <div class="orch-telegram-selector" id="orchTelegramList">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+            <div>
+              <div style="font-size:0.78rem; color:rgba(212,196,160,0.4); margin-bottom:var(--space-sm);">
+                نص الرسالة:
+              </div>
+              <div class="orch-telegram-output" id="orchTelegramOutput"></div>
+              <button class="orch-copy-btn" id="orchTelegramCopyBtn" style="margin-top:var(--space-sm); width:100%; justify-content:center; display:flex;">
+                📋 نسخ الرسالة
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 7: WORKFLOW HEALTH
+    ════════════════════════════════════════════════ -->
+    <div id="orchHealthSection" class="orch-section">
+      <div class="orch-section-header">
+        <div class="orch-section-title">
+          <div class="orch-section-title-icon">🔍</div>
+          صحة سير العمل
+        </div>
+      </div>
+
+      <div class="orch-card">
+        <div class="orch-card-body">
+          <div class="orch-health-grid" id="orchHealthGrid">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="orch-divider"></div>
+
+    <!-- ════════════════════════════════════════════════
+         SECTION 8: PLATFORM ROADMAP
+    ════════════════════════════════════════════════ -->
+    <div id="orchRoadmapSection" class="orch-section">
+      <div class="orch-section-header">
+        <div class="orch-section-title">
+          <div class="orch-section-title-icon">🗺</div>
+          خارطة طريق المنصة
+        </div>
+      </div>
+
+      <div class="orch-card">
+        <div class="orch-card-body">
+          <div class="orch-roadmap" id="orchRoadmap">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom padding -->
+    <div style="height:4rem;"></div>
+
+  </div><!-- /orch-content -->
+</div><!-- /orch-main -->
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/orchestrator.js"></script>
+</body>
+</html>
