@@ -1,0 +1,1030 @@
+/* ================================================================
+   Ishraqa Clinic — Project Orchestrator Agent
+   مركز قيادة المشروع
+   ================================================================
+   Dark mission-control aesthetic: deep charcoal backgrounds,
+   gold terminal accents, amber status indicators — feels like a
+   command bridge, not a generic dashboard.
+   ================================================================ */
+
+/* ── Layout shell ─────────────────────────────────────────────── */
+.orch-body {
+  display: flex;
+  min-height: 100vh;
+  background: #0F0B06;
+  font-family: var(--font-arabic);
+  color: #D4C4A0;
+  font-size: 0.9rem;
+  overflow-x: hidden;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────── */
+.orch-sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background: #160E05;
+  border-inline-end: 1px solid rgba(201,168,76,0.12);
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  inset-inline-start: 0;
+  z-index: 50;
+  transition: transform var(--transition-slow);
+}
+
+.orch-sidebar-brand {
+  padding: 1.25rem var(--space-lg);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.orch-brand-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  box-shadow: 0 0 12px rgba(201,168,76,0.3);
+}
+
+.orch-brand-text .name {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  line-height: 1.1;
+}
+
+.orch-brand-text .sub {
+  font-size: 0.68rem;
+  color: rgba(201,168,76,0.5);
+  letter-spacing: 0.06em;
+}
+
+.orch-nav {
+  flex: 1;
+  padding: var(--space-md) var(--space-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow-y: auto;
+}
+
+.orch-nav-section-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(201,168,76,0.35);
+  padding: var(--space-md) var(--space-sm) 6px;
+}
+
+.orch-link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.6rem var(--space-sm);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(212,196,160,0.6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  background: none;
+  font-family: var(--font-arabic);
+  width: 100%;
+  text-align: right;
+}
+
+.orch-link:hover {
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-light);
+}
+
+.orch-link.active {
+  background: rgba(201,168,76,0.12);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.orch-link-icon { font-size: 0.9rem; flex-shrink: 0; }
+
+.orch-sidebar-footer {
+  padding: var(--space-md) var(--space-sm);
+  border-top: 1px solid rgba(201,168,76,0.08);
+}
+
+/* ── Main area ────────────────────────────────────────────────── */
+.orch-main {
+  margin-inline-start: 250px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* ── Top bar ──────────────────────────────────────────────────── */
+.orch-topbar {
+  background: rgba(22, 14, 5, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  padding: 0.9rem var(--space-xl);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+.orch-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.orch-sidebar-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--gold-light);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.orch-breadcrumb {
+  font-size: 0.8rem;
+  color: rgba(201,168,76,0.5);
+}
+
+.orch-breadcrumb span:last-child { color: var(--gold-light); font-weight: 600; }
+.orch-breadcrumb-sep { margin: 0 6px; }
+
+.orch-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.orch-phase-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gold-light);
+}
+
+.orch-phase-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse 2s infinite;
+}
+
+.orch-live-clock {
+  font-size: 0.78rem;
+  color: rgba(212,196,160,0.4);
+  font-family: monospace;
+  direction: ltr;
+}
+
+/* ── Content ──────────────────────────────────────────────────── */
+.orch-content {
+  padding: var(--space-xl);
+  flex: 1;
+  max-width: 1300px;
+  width: 100%;
+}
+
+/* ── Security banner ──────────────────────────────────────────── */
+.orch-security-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(192, 57, 43, 0.1);
+  border: 1px solid rgba(192, 57, 43, 0.3);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-xl);
+  font-size: 0.85rem;
+  color: #E8A090;
+  line-height: 1.5;
+}
+
+.orch-security-banner-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* ── Section title ────────────────────────────────────────────── */
+.orch-section {
+  margin-bottom: var(--space-xl);
+}
+
+.orch-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-lg);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.orch-section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--gold-light);
+}
+
+.orch-section-title-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: rgba(201,168,76,0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.orch-section-sub {
+  font-size: 0.78rem;
+  color: rgba(212,196,160,0.4);
+  margin-top: 2px;
+}
+
+/* ── Stat cards ───────────────────────────────────────────────── */
+.orch-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-xl);
+}
+
+.orch-stat-card {
+  background: #1A1206;
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.orch-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 3px;
+  height: 100%;
+  border-radius: 0 2px 2px 0;
+}
+
+.orch-stat-card.critical::before { background: #E74C3C; }
+.orch-stat-card.high::before    { background: #E8A84C; }
+.orch-stat-card.medium::before  { background: #3498DB; }
+.orch-stat-card.done::before    { background: #2ECC71; }
+
+.orch-stat-card:hover {
+  border-color: rgba(201,168,76,0.25);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.orch-stat-value {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.orch-stat-card.critical .orch-stat-value { color: #E74C3C; }
+.orch-stat-card.high .orch-stat-value     { color: #E8A84C; }
+.orch-stat-card.medium .orch-stat-value   { color: #5DADE2; }
+.orch-stat-card.done .orch-stat-value     { color: #2ECC71; }
+
+.orch-stat-label { font-size: 0.78rem; color: rgba(212,196,160,0.5); }
+.orch-stat-icon  { font-size: 1.4rem; position: absolute; top: var(--space-md); inset-inline-end: var(--space-md); opacity: 0.25; }
+
+/* ── Cards ────────────────────────────────────────────────────── */
+.orch-card {
+  background: #1A1206;
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.orch-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md) var(--space-lg);
+  border-bottom: 1px solid rgba(201,168,76,0.08);
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.orch-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.orch-card-body {
+  padding: var(--space-lg);
+}
+
+/* ── Task list ────────────────────────────────────────────────── */
+.orch-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orch-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201,168,76,0.07);
+  background: rgba(0,0,0,0.15);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.orch-task-item:hover {
+  border-color: rgba(201,168,76,0.2);
+  background: rgba(201,168,76,0.04);
+}
+
+.orch-task-item.selected {
+  border-color: rgba(201,168,76,0.4);
+  background: rgba(201,168,76,0.08);
+}
+
+.orch-task-status {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  border: 2px solid;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.status-completed { background: rgba(46,204,113,0.15); border-color: #2ECC71; color: #2ECC71; }
+.status-in_progress { background: rgba(52,152,219,0.15); border-color: #3498DB; color: #3498DB; animation: pulse 3s infinite; }
+.status-blocked  { background: rgba(231,76,60,0.15); border-color: #E74C3C; color: #E74C3C; }
+.status-pending  { background: rgba(201,168,76,0.1); border-color: rgba(201,168,76,0.3); color: rgba(201,168,76,0.6); }
+
+.orch-task-content { flex: 1; min-width: 0; }
+.orch-task-title { font-size: 0.875rem; font-weight: 600; color: #D4C4A0; margin-bottom: 3px; }
+.orch-task-desc  { font-size: 0.78rem; color: rgba(212,196,160,0.45); line-height: 1.5; }
+.orch-task-meta  { display: flex; align-items: center; gap: var(--space-sm); margin-top: 6px; flex-wrap: wrap; }
+
+.orch-task-owner {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+}
+
+.owner-claude   { background: rgba(52,152,219,0.15); color: #5DADE2; border: 1px solid rgba(52,152,219,0.25); }
+.owner-n8n      { background: rgba(232,168,76,0.15); color: #E8A84C; border: 1px solid rgba(232,168,76,0.25); }
+.owner-chatgpt  { background: rgba(46,204,113,0.15); color: #58D68D; border: 1px solid rgba(46,204,113,0.25); }
+.owner-user     { background: rgba(155,89,182,0.15); color: #BB8FCE; border: 1px solid rgba(155,89,182,0.25); }
+
+.orch-priority-badge {
+  font-size: 0.68rem;
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.priority-critical { background: rgba(231,76,60,0.15); color: #E74C3C; }
+.priority-high     { background: rgba(232,168,76,0.15); color: #E8A84C; }
+.priority-medium   { background: rgba(52,152,219,0.15); color: #5DADE2; }
+.priority-low      { background: rgba(127,140,141,0.15); color: #95A5A6; }
+
+/* ── Manual inputs ────────────────────────────────────────────── */
+.orch-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.orch-input-card {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,168,76,0.1);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  transition: all var(--transition-fast);
+}
+
+.orch-input-card:hover {
+  border-color: rgba(201,168,76,0.25);
+}
+
+.orch-input-card.status-missing { border-inline-start: 3px solid #E74C3C; }
+.orch-input-card.status-provided { border-inline-start: 3px solid #2ECC71; }
+
+.orch-input-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #D4C4A0;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+.orch-input-desc { font-size: 0.78rem; color: rgba(212,196,160,0.45); line-height: 1.5; margin-bottom: var(--space-sm); }
+
+.orch-input-field {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(201,168,76,0.15);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-arabic);
+  font-size: 0.82rem;
+  color: #D4C4A0;
+  outline: none;
+  transition: border-color var(--transition-fast);
+  direction: ltr;
+}
+
+.orch-input-field:focus {
+  border-color: rgba(201,168,76,0.4);
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.06);
+}
+
+.orch-input-save-btn {
+  margin-top: 8px;
+  padding: 5px 14px;
+  background: rgba(201,168,76,0.12);
+  border: 1px solid rgba(201,168,76,0.25);
+  border-radius: var(--radius-sm);
+  color: var(--gold-light);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-arabic);
+  transition: all var(--transition-fast);
+}
+
+.orch-input-save-btn:hover {
+  background: rgba(201,168,76,0.22);
+  border-color: rgba(201,168,76,0.4);
+}
+
+.orch-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.orch-status-dot.missing  { background: #E74C3C; box-shadow: 0 0 5px rgba(231,76,60,0.5); }
+.orch-status-dot.provided { background: #2ECC71; }
+
+/* ── Prompt generator ─────────────────────────────────────────── */
+.orch-prompt-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.orch-tab-btn {
+  padding: 6px 16px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-arabic);
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(201,168,76,0.15);
+  background: rgba(0,0,0,0.2);
+  color: rgba(212,196,160,0.5);
+}
+
+.orch-tab-btn:hover  { border-color: rgba(201,168,76,0.3); color: var(--gold-light); }
+.orch-tab-btn.active { background: rgba(201,168,76,0.15); border-color: rgba(201,168,76,0.4); color: var(--gold-light); }
+
+.orch-tab-btn.claude  { }
+.orch-tab-btn.n8n     { }
+.orch-tab-btn.chatgpt { }
+
+.orch-prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.orch-prompt-item {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.orch-prompt-item.urgent {
+  border-color: rgba(231,76,60,0.25);
+  background: rgba(231,76,60,0.04);
+}
+
+.orch-prompt-item:hover { border-color: rgba(201,168,76,0.2); }
+
+.orch-prompt-info { flex: 1; min-width: 0; }
+.orch-prompt-title { font-size: 0.875rem; font-weight: 600; color: #D4C4A0; margin-bottom: 3px; }
+.orch-prompt-meta  { font-size: 0.75rem; color: rgba(212,196,160,0.4); }
+
+.orch-prompt-item .urgent-label {
+  font-size: 0.68rem;
+  padding: 2px 8px;
+  background: rgba(231,76,60,0.15);
+  color: #E74C3C;
+  border-radius: var(--radius-full);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.orch-copy-btn {
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-arabic);
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(201,168,76,0.2);
+  background: rgba(201,168,76,0.08);
+  color: var(--gold-light);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.orch-copy-btn:hover     { background: rgba(201,168,76,0.18); border-color: rgba(201,168,76,0.4); }
+.orch-copy-btn.copied    { background: rgba(46,204,113,0.15); border-color: #2ECC71; color: #2ECC71; }
+
+/* ── Prompt output box ────────────────────────────────────────── */
+.orch-prompt-output {
+  background: rgba(0,0,0,0.35);
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  font-size: 0.82rem;
+  color: #C4B890;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'Courier New', Courier, monospace;
+  max-height: 380px;
+  overflow-y: auto;
+  direction: ltr;
+  text-align: left;
+}
+
+.orch-prompt-output:empty::before {
+  content: '← اختر مهمة من اليسار لعرض prompt الخاص بها';
+  color: rgba(212,196,160,0.2);
+  font-family: var(--font-arabic);
+  direction: rtl;
+  font-style: italic;
+  display: block;
+  text-align: right;
+}
+
+/* ── Telegram draft ───────────────────────────────────────────── */
+.orch-telegram-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.orch-telegram-selector { display: flex; flex-direction: column; gap: 8px; }
+
+.orch-telegram-input-item {
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(201,168,76,0.1);
+  background: rgba(0,0,0,0.15);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-size: 0.82rem;
+  color: rgba(212,196,160,0.6);
+}
+
+.orch-telegram-input-item:hover,
+.orch-telegram-input-item.selected {
+  border-color: rgba(201,168,76,0.3);
+  color: var(--gold-light);
+  background: rgba(201,168,76,0.06);
+}
+
+.orch-telegram-output {
+  background: #12100A;
+  border: 1px solid rgba(201,168,76,0.12);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg);
+  font-size: 0.85rem;
+  color: #D4C4A0;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  direction: rtl;
+  min-height: 200px;
+  font-family: var(--font-arabic);
+  position: relative;
+}
+
+.orch-telegram-output:empty::before {
+  content: 'اختر معلومة مطلوبة من القائمة لتوليد رسالة التيليغرام';
+  color: rgba(212,196,160,0.2);
+  font-style: italic;
+}
+
+/* ── Roadmap ──────────────────────────────────────────────────── */
+.orch-roadmap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.orch-phase-item {
+  display: flex;
+  gap: var(--space-lg);
+  align-items: flex-start;
+}
+
+.orch-phase-track {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 40px;
+}
+
+.orch-phase-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 2px solid;
+  flex-shrink: 0;
+}
+
+.phase-active   { border-color: var(--gold); background: rgba(201,168,76,0.15); color: var(--gold-light); box-shadow: 0 0 12px rgba(201,168,76,0.2); }
+.phase-upcoming { border-color: rgba(201,168,76,0.2); background: transparent; color: rgba(201,168,76,0.35); }
+.phase-done     { border-color: #2ECC71; background: rgba(46,204,113,0.12); color: #2ECC71; }
+
+.orch-phase-line {
+  width: 2px;
+  flex: 1;
+  min-height: 20px;
+  background: rgba(201,168,76,0.1);
+  margin-top: 4px;
+}
+
+.orch-phase-content {
+  flex: 1;
+  padding-bottom: var(--space-lg);
+}
+
+.orch-phase-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  margin-bottom: 4px;
+}
+
+.orch-phase-phase {
+  font-size: 0.72rem;
+  color: rgba(201,168,76,0.4);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.orch-phase-goals {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.orch-phase-goal {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: rgba(212,196,160,0.55);
+  line-height: 1.5;
+}
+
+.orch-phase-goal::before {
+  content: '◆';
+  font-size: 0.5rem;
+  color: rgba(201,168,76,0.3);
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ── Workflow health ──────────────────────────────────────────── */
+.orch-health-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+.orch-health-item {
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md);
+  text-align: center;
+}
+
+.orch-health-icon   { font-size: 1.5rem; margin-bottom: 6px; }
+.orch-health-label  { font-size: 0.75rem; color: rgba(212,196,160,0.4); margin-bottom: 4px; }
+
+.orch-health-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.health-ok      { background: rgba(46,204,113,0.12); color: #2ECC71; }
+.health-warning { background: rgba(232,168,76,0.12); color: #E8A84C; }
+.health-error   { background: rgba(231,76,60,0.12);  color: #E74C3C; }
+.health-unknown { background: rgba(127,140,141,0.12); color: #95A5A6; }
+
+/* ── Next best action ─────────────────────────────────────────── */
+.orch-next-action {
+  background: linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(0,0,0,0) 100%);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.orch-next-action::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(to bottom, var(--gold), var(--gold-dark));
+}
+
+.orch-next-action-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+}
+
+.orch-next-action-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #E8D8A8;
+  margin-bottom: var(--space-sm);
+  line-height: 1.3;
+}
+
+.orch-next-action-desc {
+  font-size: 0.85rem;
+  color: rgba(212,196,160,0.55);
+  line-height: 1.7;
+  margin-bottom: var(--space-lg);
+}
+
+.orch-next-action-buttons {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+}
+
+/* ── Buttons ──────────────────────────────────────────────────── */
+.orch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-arabic);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid;
+  transition: all var(--transition-fast);
+}
+
+.orch-btn-gold {
+  background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+  border-color: var(--gold-dark);
+  color: #120E06;
+}
+
+.orch-btn-gold:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+.orch-btn-outline {
+  background: rgba(201,168,76,0.06);
+  border-color: rgba(201,168,76,0.2);
+  color: var(--gold-light);
+}
+
+.orch-btn-outline:hover { background: rgba(201,168,76,0.12); border-color: rgba(201,168,76,0.35); }
+
+.orch-btn-ghost {
+  background: transparent;
+  border-color: rgba(212,196,160,0.12);
+  color: rgba(212,196,160,0.5);
+}
+
+.orch-btn-ghost:hover { border-color: rgba(212,196,160,0.25); color: rgba(212,196,160,0.8); }
+
+.orch-btn-danger {
+  background: rgba(231,76,60,0.1);
+  border-color: rgba(231,76,60,0.25);
+  color: #E74C3C;
+}
+
+.orch-btn-danger:hover { background: rgba(231,76,60,0.18); }
+
+/* ── Export/Import bar ────────────────────────────────────────── */
+.orch-state-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  padding: var(--space-md) var(--space-lg);
+  background: rgba(0,0,0,0.2);
+  border: 1px solid rgba(201,168,76,0.08);
+  border-radius: var(--radius-sm);
+  margin-bottom: var(--space-xl);
+}
+
+.orch-state-bar-label {
+  font-size: 0.75rem;
+  color: rgba(212,196,160,0.35);
+  margin-inline-end: auto;
+}
+
+/* ── Toast notification ───────────────────────────────────────── */
+.orch-toast {
+  position: fixed;
+  bottom: 2rem;
+  inset-inline-end: 2rem;
+  background: #1E1608;
+  border: 1px solid rgba(201,168,76,0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1.25rem;
+  font-size: 0.85rem;
+  color: var(--gold-light);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  z-index: 999;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all var(--transition-base);
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.orch-toast.show { opacity: 1; transform: translateY(0); }
+
+/* ── Scrollbar ────────────────────────────────────────────────── */
+.orch-content::-webkit-scrollbar,
+.orch-prompt-output::-webkit-scrollbar,
+.orch-nav::-webkit-scrollbar { width: 4px; }
+
+.orch-content::-webkit-scrollbar-track,
+.orch-prompt-output::-webkit-scrollbar-track { background: transparent; }
+
+.orch-content::-webkit-scrollbar-thumb,
+.orch-prompt-output::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.2); border-radius: 2px; }
+
+/* ── Divider ──────────────────────────────────────────────────── */
+.orch-divider {
+  height: 1px;
+  background: rgba(201,168,76,0.07);
+  margin: var(--space-lg) 0;
+}
+
+/* ── Progress bar ─────────────────────────────────────────────── */
+.orch-progress-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.orch-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(201,168,76,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.orch-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(to left, var(--gold-dark), var(--gold-light));
+  transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.orch-progress-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  white-space: nowrap;
+}
+
+/* ── Two-col layout ───────────────────────────────────────────── */
+.orch-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.orch-three-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+/* ── Hidden file input ────────────────────────────────────────── */
+#importFileInput { display: none; }
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .orch-stats-grid  { grid-template-columns: repeat(2, 1fr); }
+  .orch-health-grid { grid-template-columns: repeat(2, 1fr); }
+  .orch-three-col   { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 860px) {
+  .orch-sidebar {
+    transform: translateX(100%);
+  }
+  .orch-sidebar.open {
+    transform: translateX(0);
+  }
+  .orch-main { margin-inline-start: 0; }
+  .orch-sidebar-toggle { display: block; }
+  .orch-two-col { grid-template-columns: 1fr; }
+  .orch-telegram-wrap { grid-template-columns: 1fr; }
+  .orch-inputs-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .orch-stats-grid  { grid-template-columns: 1fr 1fr; }
+  .orch-health-grid { grid-template-columns: 1fr; }
+  .orch-three-col   { grid-template-columns: 1fr; }
+  .orch-content     { padding: var(--space-md); }
+  .orch-topbar      { padding: var(--space-md); }
+}
